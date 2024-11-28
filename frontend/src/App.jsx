@@ -20,7 +20,7 @@ const sampleDataForPhotoListItem = {
 const App = () => {
   const photos = [];
   for (let i = 0; i < 3; i++) {
-    photos.push(<PhotoListItem photoData={sampleDataForPhotoListItem}/>)
+    photos.push(<PhotoListItem key={i} photoData={sampleDataForPhotoListItem}/>)
   }
   
   return (
