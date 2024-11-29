@@ -2,10 +2,10 @@ import React from "react";
 
 import "../styles/TopicList.scss";
 import TopicListItem from "./TopicListItem";
-import topics from "mocks/topics";
 
-const TopicList = () => {
-  const topicsArray = topics.map(topic => {
+const TopicList = (props) => {
+  const { topicsData } = props;
+  const topicsArray = topicsData.map(topic => {
     return (
       <TopicListItem key={topic.id} topicData={topic}/>
     )
