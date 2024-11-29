@@ -5,10 +5,10 @@ import PhotoListItem from "./PhotoListItem";
 
 
 const PhotoList = (props) => {
-  const {photosData} = props;
+  const {photosData, toggleFavPhoto} = props;
   const photosArray = photosData.map(photo => {
     return (
-      <PhotoListItem key={photo.id} photoData={photo}/>
+      <PhotoListItem key={photo.id} photoData={photo} toggleFavPhoto={toggleFavPhoto}/>
     )
   })
 
