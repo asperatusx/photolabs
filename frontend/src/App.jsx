@@ -14,14 +14,13 @@ const App = () => {
 
   const toggleFavPhoto = photoId => {
     setFavPhotos(prevFav => {
-      console.log(prevFav)
-      prevFav.includes(photoId) ? prevFav.filter(id => id !== photoId) : [...prevFav, photoId]
+      return prevFav.includes(photoId) ? prevFav.filter(id => id !== photoId) : [...prevFav, photoId]
     })
   }
-  
+  console.log(favPhotos)
   return (
     <div className="App">
-      <HomeRoute photosData={photos} topicsData={topics} toggleFavPhoto={toggleFavPhoto}/>
+      <HomeRoute photosData={photos} topicsData={topics} toggleFavPhoto={toggleFavPhoto} favPhotos={favPhotos}/>
     </div>
   );
 };

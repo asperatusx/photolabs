@@ -8,11 +8,8 @@ function PhotoFavButton(props) {
   const { toggleFavPhoto, photoId } = props
 
   const handleClick = () => {
-    setLike(prevLike => {
-      const newLikeState = !prevLike;
+      setLike(prev => !prev)
       toggleFavPhoto(photoId);
-      return newLikeState;
-    })
   }
 
   return (
