@@ -13,13 +13,7 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 const App = () => {
   const [favPhotos, setFavPhotos] = useState([]);
   const [modal, setModal] = useState(false);
-  const [photoDetails, setPhotoDetails] = useState({})
-
-  const toggleFavPhoto = photoId => {
-    setFavPhotos(prevFav => {
-      return prevFav.includes(photoId) ? prevFav.filter(id => id !== photoId) : [...prevFav, photoId]
-    })
-  }
+  const [photoDetails, setPhotoDetails] = useState({});
 
   const toggleModal = (e, photoInfo) => {
     e.stopPropagation();
@@ -29,10 +23,16 @@ const App = () => {
     })
   }
 
+  const handleFavButton = (photoId) => {
+    setFavPhotos(prevFav => {
+      return prevFav.includes(photoId) ? prevFav.filter(id => id !== photoId) : [...prevFav, photoId]
+    })
+  }
+
   return (
     <div className="App">
-      <HomeRoute photosData={photos} topicsData={topics} toggleFavPhoto={toggleFavPhoto} favPhotos={favPhotos} toggleModal={toggleModal}/>
-      { modal && <PhotoDetailsModal toggleModal={toggleModal} toggleFavPhoto={toggleFavPhoto} photoDetails={photoDetails}/> }
+      <HomeRoute photosData={photos} topicsData={topics} favPhotos={favPhotos} toggleModal={toggleModal} handleFavButton={handleFavButton}/>
+      { modal && <PhotoDetailsModal toggleModal={toggleModal} photoDetails={photoDetails} handleFavButton={handleFavButton} favPhotos={favPhotos}/> }
     </div>
   );
 };

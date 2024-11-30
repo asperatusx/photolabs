@@ -4,18 +4,12 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton(props) {
-  const [like, setLike] = useState(false)
-  const { toggleFavPhoto, photoId } = props
-
-  const handleClick = () => {
-      setLike(prev => !prev)
-      toggleFavPhoto(photoId);
-  }
+  const { handleFavButton, photoId, isFav } = props
 
   return (
-    <div onClick={handleClick} className="photo-list__fav-icon">
+    <div onClick={() => handleFavButton(photoId)} className="photo-list__fav-icon">
       <div className="photo-list__fav-icon-svg">
-        <FavIcon selected={like}/>
+        <FavIcon selected={isFav}/>
       </div>
     </div>
   );
