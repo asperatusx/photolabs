@@ -12,7 +12,11 @@
 }
 
 .photo-details-modal__close-button {
-  background-color: white;
+  position: sticky; /* Makes the button stick to the top */
+  top: 0; /* Stick at the top of the modal */
+  left: 0; /* Align to the left */
+  z-index: 10; /* Ensure it stays on top of other elements */
+  background-color: transparent;
   border: none;
   color: white;
   text-align: center;
@@ -20,7 +24,7 @@
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  margin-left: 16px;
+  margin-left: 12px;
   margin-top: 16px;
 }
 
