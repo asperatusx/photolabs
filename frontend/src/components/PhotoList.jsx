@@ -6,6 +6,7 @@ import PhotoListItem from "./PhotoListItem";
 
 const PhotoList = (props) => {
   const {photosData, toggleFavPhoto, toggleModal} = props;
+  
   const photosArray = photosData.map(photo => {
     return (
       <PhotoListItem key={photo.id} photoData={photo} toggleFavPhoto={toggleFavPhoto} toggleModal={toggleModal}/>

@@ -29,11 +29,10 @@ const App = () => {
     })
   }
 
-  console.log('photo details', photoDetails)
   return (
     <div className="App">
       <HomeRoute photosData={photos} topicsData={topics} toggleFavPhoto={toggleFavPhoto} favPhotos={favPhotos} toggleModal={toggleModal}/>
-      { modal && <PhotoDetailsModal toggleModal={toggleModal} /> }
+      { modal && <PhotoDetailsModal toggleModal={toggleModal} toggleFavPhoto={toggleFavPhoto} photoDetails={photoDetails}/> }
     </div>
   );
 };
