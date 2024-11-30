@@ -11,7 +11,7 @@ const PhotoListItem = (props) => {
   return (
     <div key={id} className="photo-list__item">
       <PhotoFavButton toggleFavPhoto={toggleFavPhoto} photoId={id}/>
-      <img onClick={toggleModal} className="photo-list__image" src={urls.full} alt="picture of phone in hand" />
+      <img onClick={(e) => toggleModal(e, props.photoData)} className="photo-list__image" src={urls.full} alt="picture of phone in hand" />
       <div className="photo-list__user-details">
         <img className="photo-list__user-profile" src={user.profile} alt="joe profile picture" />
         <div className="photo-list__user-container">

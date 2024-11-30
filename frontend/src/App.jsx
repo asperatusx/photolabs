@@ -13,6 +13,7 @@ import PhotoDetailsModal from 'routes/PhotoDetailsModal';
 const App = () => {
   const [favPhotos, setFavPhotos] = useState([]);
   const [modal, setModal] = useState(false);
+  const [photoDetails, setPhotoDetails] = useState({})
 
   const toggleFavPhoto = photoId => {
     setFavPhotos(prevFav => {
@@ -20,15 +21,19 @@ const App = () => {
     })
   }
 
-  const toggleModal = () => {
+  const toggleModal = (e, photoInfo) => {
+    e.stopPropagation();
     setModal(prevModal => !prevModal)
+    setPhotoDetails(photoDetails => {
+      return photoDetails = {...photoInfo}
+    })
   }
 
-  console.log(favPhotos)
+  console.log('photo details', photoDetails)
   return (
     <div className="App">
       <HomeRoute photosData={photos} topicsData={topics} toggleFavPhoto={toggleFavPhoto} favPhotos={favPhotos} toggleModal={toggleModal}/>
-      { modal && <PhotoDetailsModal toggleModal={toggleModal} photosData={photos}/> }
+      { modal && <PhotoDetailsModal toggleModal={toggleModal} /> }
     </div>
   );
 };
