@@ -1,14 +1,18 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 
 const ACTIONS = {
   TOGGLE_MODAL: 'TOGGLE_MODAL',
-  HANDLE_FAV_BUTTON: 'HANDLE_FAV_BUTTON'
+  HANDLE_FAV_BUTTON: 'HANDLE_FAV_BUTTON',
+  SET_PHOTO_DATA: 'SET_PHOTO_DATA',
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA'
 }
 
 const initialState = {
   favPhotos: [],
   modal: false,
-  photoDetails: {}
+  photoDetails: {},
+  photosData: [],
+  topicsData: []
 }
 
 function reducer(state, action) {
@@ -24,6 +28,16 @@ function reducer(state, action) {
         ...state,
         favPhotos: state.favPhotos.includes(action.payload) ? state.favPhotos.filter(id => id !== action.payload) : [...state.favPhotos, action.payload]
       }
+    case ACTIONS.SET_PHOTO_DATA:
+      return {
+        ...state,
+        photosData: action.payload
+      }
+    case ACTIONS.SET_TOPIC_DATA:
+      return {
+        ...state,
+        topicsData: action.payload
+      }
     default:
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
@@ -32,27 +46,34 @@ function reducer(state, action) {
 }
 
 const useApplicationData = () => {
-  // const [favPhotos, setFavPhotos] = useState([]);
-  // const [modal, setModal] = useState(false);
-  // const [photoDetails, setPhotoDetails] = useState({});
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  useEffect(() => {
+    fetch('/api/photos')
+      .then(res => res.json())
+      .then(data => dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data}))
+  }, [])
+
+  useEffect(() => {
+    fetch('/api/topics')
+      .then(res => res.json())
+      .then(data => dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data}))
+  }, [])
+
 
   const toggleModal = (e, photoInfo) => {
     e.stopPropagation();
-    // setModal(prevModal => !prevModal)
-    // setPhotoDetails({...photoInfo})
     dispatch({type: ACTIONS.TOGGLE_MODAL, payload: photoInfo})
   }
 
   const handleFavButton = (photoId) => {
-    // setFavPhotos(prevFav => {
-    //   return prevFav.includes(photoId) ? prevFav.filter(id => id !== photoId) : [...prevFav, photoId]
-    // })
     dispatch({type: ACTIONS.HANDLE_FAV_BUTTON, payload: photoId})
   }
 
+
+
   return {
-    favPhotos: state.favPhotos, modal: state.modal, photoDetails: state.photoDetails, toggleModal, handleFavButton
+    photosData: state.photosData, topicsData: state.topicsData, favPhotos: state.favPhotos, modal: state.modal, photoDetails: state.photoDetails, toggleModal, handleFavButton
   }
 }
 
