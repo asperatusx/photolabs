@@ -4,7 +4,8 @@ const ACTIONS = {
   TOGGLE_MODAL: 'TOGGLE_MODAL',
   HANDLE_FAV_BUTTON: 'HANDLE_FAV_BUTTON',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
-  SET_TOPIC_DATA: 'SET_TOPIC_DATA'
+  SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 }
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
   modal: false,
   photoDetails: {},
   photosData: [],
-  topicsData: []
+  topicsData: [],
 }
 
 function reducer(state, action) {
@@ -37,6 +38,11 @@ function reducer(state, action) {
       return {
         ...state,
         topicsData: action.payload
+      }
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      return {
+        ...state,
+        photosData: action.payload
       }
     default:
       throw new Error(
@@ -70,10 +76,16 @@ const useApplicationData = () => {
     dispatch({type: ACTIONS.HANDLE_FAV_BUTTON, payload: photoId})
   }
 
+  const onClickTopic = (topicId) => {
+    fetch(`/api/topics/photos/${topicId}`)
+      .then(res => res.json())
+      .then(data => dispatch({type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: data}))
+      .catch(error => console.error('Error fetching photos by topic:', error))
+  }
 
 
   return {
-    photosData: state.photosData, topicsData: state.topicsData, favPhotos: state.favPhotos, modal: state.modal, photoDetails: state.photoDetails, toggleModal, handleFavButton
+    photosData: state.photosData, topicsData: state.topicsData, favPhotos: state.favPhotos, modal: state.modal, photoDetails: state.photoDetails, toggleModal, handleFavButton, onClickTopic
   }
 }
 

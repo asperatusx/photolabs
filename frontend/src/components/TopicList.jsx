@@ -4,10 +4,10 @@ import "../styles/TopicList.scss";
 import TopicListItem from "./TopicListItem";
 
 const TopicList = (props) => {
-  const { topicsData } = props;
+  const { topicsData, onClickTopic } = props;
   const topicsArray = topicsData.map(topic => {
     return (
-      <TopicListItem key={topic.id} topicData={topic}/>
+      <TopicListItem key={topic.id} topicData={topic} onClickTopic={onClickTopic} />
     )
   })
   return (
