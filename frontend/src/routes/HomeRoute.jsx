@@ -6,6 +6,7 @@ import PhotoList from "components/PhotoList";
 
 const HomeRoute = (props) => {
   const {
+    isLoading,
     photosData,
     topicsData,
     handleFavButton,
@@ -21,6 +22,7 @@ const HomeRoute = (props) => {
         onClickTopic={onClickTopic}
       />
       <PhotoList
+        isLoading={isLoading}
         photosData={photosData}
         topicPhotosData
         handleFavButton={handleFavButton}

@@ -9,6 +9,7 @@ const ACTIONS = {
 };
 
 const initialState = {
+  isLoading: true,
   favPhotos: [],
   modal: false,
   photoDetails: {},
@@ -35,6 +36,7 @@ function reducer(state, action) {
       return {
         ...state,
         photosData: action.payload,
+        isLoading: false
       };
     case ACTIONS.SET_TOPIC_DATA:
       return {
@@ -61,7 +63,7 @@ const useApplicationData = () => {
     fetch("/api/photos")
       .then((res) => res.json())
       .then((data) =>
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data})
       );
   }, []);
 
@@ -97,6 +99,7 @@ const useApplicationData = () => {
   };
 
   return {
+    isLoading: state.isLoading,
     photosData: state.photosData,
     topicsData: state.topicsData,
     favPhotos: state.favPhotos,

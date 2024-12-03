@@ -1,0 +1,23 @@
+.skeleton {
+  width: 300px;
+  height: 250px;
+  margin: 24px;
+  padding: 8px;
+  border-width: 0.5px;
+  border-color: lightgray;
+  border-style: solid;
+  border-radius: 8px;
+  background-color: #fff;
+  background-size: 200% 100%;
+  background: linear-gradient(100deg, rgba(232,232,232,1) 20%, rgba(250,250,250,1) 50%, rgba(232,232,232,1) 60%); 
+  animation: skeleton-loading 2s linear infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 120px 0;
+  }
+}

@@ -9,6 +9,7 @@ import PhotoDetailsModal from "routes/PhotoDetailsModal";
 const App = () => {
   //grab object from custom hook
   const {
+    isLoading,
     photosData,
     topicsData,
     topicPhotosData,
@@ -23,6 +24,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
+        isLoading={isLoading}
         photosData={photosData}
         topicsData={topicsData}
         topicPhotosData={topicPhotosData}
